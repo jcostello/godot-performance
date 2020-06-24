@@ -1,0 +1,339 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Assets/satara_night_no_lamps_4k.hdr" type="Texture" id=1]
+[ext_resource path="res://Scenes/SpruceTree.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/LowpolyForestPack/TreesTexture/SpruceTreeLeaf.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Person.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Fire.dae" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/OmniLight.gd" type="Script" id=6]
+[ext_resource path="res://Tent.dae" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/DeadSpruceTree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Grass.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Models/Car 5.fbx" type="PackedScene" id=10]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="PanoramaSky" id=3]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=4]
+background_mode = 3
+background_sky = SubResource( 3 )
+background_energy = 0.8
+fog_enabled = true
+fog_color = Color( 0.0705882, 0.235294, 0.4, 1 )
+fog_sun_color = Color( 0.501961, 0.427451, 0.282353, 1 )
+fog_depth_begin = 0.0
+fog_depth_curve = 0.378929
+fog_transmit_enabled = true
+fog_transmit_curve = 0.450626
+tonemap_mode = 2
+tonemap_exposure = 0.8
+tonemap_white = 1.5
+auto_exposure_scale = 0.1
+adjustment_enabled = true
+adjustment_brightness = 0.97
+adjustment_contrast = 1.11
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.0444444, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 0.474915, 0.484375, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.213636 ), 0.0, 0.0, 0, 0, Vector2( 0.177215, 0.943182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 0.8
+angular_velocity = 90.0
+angular_velocity_random = 1.0
+angle = 1.0
+scale = 0.7
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id=11]
+material = SubResource( 10 )
+
+[sub_resource type="Gradient" id=12]
+colors = PoolColorArray( 0, 0, 0, 1, 0.247059, 0.247059, 0.247059, 0.827451 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 0.338636 ), 0.0, 0.0, 0, 0, Vector2( 0.234177, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 1
+emission_sphere_radius = 0.5
+scale = 0.7
+scale_curve = SubResource( 15 )
+color_ramp = SubResource( 13 )
+
+[sub_resource type="SphereMesh" id=17]
+material = SubResource( 10 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.984025, 0, 0.178029, 0, 1, 0, -0.178029, 0, 0.984025, -0.9778, 0.883818, 3.40612 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 31.3627, 0.000158208, -0.106192, -0.000158209, 31.3629, -5.92038e-08, 0.106192, 5.9732e-07, 31.3627, -0.0063802, 0, 0.00242358 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 0.466387, 3.86663e-08, 0.884581, -3.86663e-08, 1, -2.3325e-08, -0.884581, -2.3325e-08, 0.466387, 5.53704, 0.510869, 0 )
+visible = false
+light_color = Color( 0.929412, 0.921569, 0.858824, 1 )
+light_energy = 1.86
+shadow_enabled = true
+shadow_reverse_cull_face = true
+spot_range = 12.1905
+spot_angle = 43.7537
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.672806, 0.739819, 0, -0.739819, 0.672806, 0, 4.23569, 4.97511 )
+light_color = Color( 0.529412, 0.54902, 0.733333, 1 )
+light_energy = 0.1
+shadow_enabled = true
+shadow_color = Color( 0.211765, 0.152941, 0.615686, 1 )
+directional_shadow_mode = 0
+
+[node name="Env" type="Spatial" parent="."]
+
+[node name="SpruceTree2" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.909708, 0, 0.415249, 0, 1, 0, -0.415249, 0, 0.909708, 1.95175, 0, -4.9309 )
+
+[node name="SpruceTree3" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.97373, 0, -0.227705, 0, 1, 0, 0.227705, 0, 0.97373, 3.30509, 0, -6.75827 )
+
+[node name="SpruceTree4" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.999437, 0, 0.0335389, 0, 1, 0, -0.0335389, 0, 0.999437, 4.93435, -0.152179, -5.12111 )
+
+[node name="SpruceTree5" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.750143, 0, -7.47403 )
+
+[node name="SpruceTree6" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52243, 0, -7.47874 )
+
+[node name="SpruceTree7" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90448, 0, -5.92078 )
+
+[node name="SpruceTree8" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.815411, 0, -0.578883, 0, 1, 0, 0.578883, 0, 0.815411, -2.27188, 0, -4.66287 )
+
+[node name="SpruceTree9" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.992343, 0, -0.123515, 0, 1, 0, 0.123515, 0, 0.992343, -5.71186, 0, -7.84269 )
+
+[node name="SpruceTree10" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.40317, 0, -8.12211 )
+
+[node name="SpruceTree11" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.89376, 0, -4.7999 )
+
+[node name="SpruceTree12" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.98597, 0, -6.92379 )
+
+[node name="SpruceTree13" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.99487, 0, 0.10116, 0, 1, 0, -0.10116, 0, 0.99487, -8.48609, 0, -5.00691 )
+
+[node name="SpruceTree23" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.99487, 0, 0.10116, 0, 1, 0, -0.10116, 0, 0.99487, -11.2813, 0, -5.00691 )
+
+[node name="SpruceTree24" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.99487, 0, 0.10116, 0, 1, 0, -0.10116, 0, 0.99487, -11.2813, 0, -6.66 )
+
+[node name="SpruceTree25" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.99487, 0, 0.10116, 0, 1, 0, -0.10116, 0, 0.99487, -13.0546, 0, -6.66 )
+
+[node name="SpruceTree26" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.969505, 0, 0.24507, 0, 1, 0, -0.24507, 0, 0.969505, -13.0546, 0, -3.985 )
+
+[node name="SpruceTree27" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.999996, 0, 0.00279249, 0, 1, 0, -0.00279249, 0, 0.999996, -15.1886, 0, -5.60803 )
+
+[node name="SpruceTree14" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0103, 0, -6.67934 )
+
+[node name="SpruceTree15" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25951, 0, -7.3581 )
+
+[node name="SpruceTree16" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.71151, 0, -8.06352 )
+
+[node name="SpruceTree17" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.24611, 0, -6.64353 )
+
+[node name="SpruceTree18" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 0.698952, -0.000201371, 0.715168, 0.000150225, 1, 0.000134753, -0.715168, 1.32502e-05, 0.698952, 8.51821, 0, -4.40348 )
+
+[node name="SpruceTree21" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.37807, 0, -7.2074 )
+
+[node name="SpruceTree22" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0087, 0, -6.2805 )
+
+[node name="SpruceTree19" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51821, 0, -4.40348 )
+
+[node name="SpruceTree20" parent="Env" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51821, 0, -4.40348 )
+
+[node name="DeadSpruce2" parent="Env" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.034731, 0, -5.4029 )
+
+[node name="DeadSpruce3" parent="Env" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4541, 0, -4.08905 )
+
+[node name="DeadSpruce4" parent="Env" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56241, 0, -3.07376 )
+
+[node name="DeadSpruce6" parent="Env" instance=ExtResource( 8 )]
+transform = Transform( 0.492499, 0, -0.870313, 0, 1, 0, 0.870313, 0, 0.492499, 0.0173035, 0, 1.71577 )
+
+[node name="DeadSpruce5" parent="Env" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41778, 0, -2.85612 )
+
+[node name="Grass_005" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38177, -0.0120563, 1.25146 )
+
+[node name="Grass_006" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70286, -0.0120563, 0.184603 )
+
+[node name="Grass_007" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62215, -0.0120563, 1.55627 )
+
+[node name="Grass_008" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 0.66262, 0, -0.748956, 0, 1, 0, 0.748956, 0, 0.66262, -0.837247, -0.0120563, -1.35333 )
+
+[node name="Grass_013" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 0.669169, 0, -0.74311, 0, 1, 0, 0.74311, 0, 0.669169, -1.44725, -0.0120562, -0.881032 )
+
+[node name="Grass_022" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 0.548016, 0, -0.836468, 0, 1, 0, 0.836468, 0, 0.548016, -1.54915, -0.0120562, -1.23039 )
+
+[node name="Grass_023" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 0.364633, 0, -0.931151, 0, 1, 0, 0.931151, 0, 0.364633, -2.10866, -0.012056, -0.454676 )
+
+[node name="Grass_009" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 0.699913, 0, -0.714228, 0, 1, 0, 0.714228, 0, 0.699913, -3.26192, -0.0120563, -1.53345 )
+
+[node name="Grass_010" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.617555, -0.0120563, -0.660568 )
+
+[node name="Grass_011" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255326, -0.0120563, 0.0183397 )
+
+[node name="Grass_012" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45406, -0.0120563, 1.00266 )
+
+[node name="Grass_014" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.06197, -0.012056, 0.354142 )
+
+[node name="Grass_015" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 0.365039, 0, 0.930992, 0, 1, 0, -0.930992, 0, 0.365039, -3.93771, -0.012056, -1.04073 )
+
+[node name="Grass_016" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53654, -0.0120563, -1.72495 )
+
+[node name="Grass_017" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33863, -0.0120563, -0.147718 )
+
+[node name="Grass_018" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81483, -0.0120563, -1.72761 )
+
+[node name="Grass_019" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57194, -0.0120567, -1.78558 )
+
+[node name="Grass_020" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03711, -0.0120567, -0.0374616 )
+
+[node name="Grass_021" parent="Env" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03711, -0.0120567, -0.0374616 )
+
+[node name="Fire2" type="Spatial" parent="."]
+
+[node name="Fire" type="Particles" parent="Fire2"]
+transform = Transform( -0.168195, -8.48453e-07, 0.000569498, 8.4846e-07, -0.168195, 3.17504e-10, -0.000569498, -3.20336e-09, -0.168195, -2.75604, 0.309165, -1.86265e-09 )
+amount = 32
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 11 )
+
+[node name="Smoke" type="Particles" parent="Fire2"]
+transform = Transform( -0.168195, -8.48453e-07, 0.000569498, 8.4846e-07, -0.168195, 3.17504e-10, -0.000569498, -3.20336e-09, -0.168195, -2.75604, 0.309165, -1.86265e-09 )
+amount = 16
+lifetime = 1.5
+process_material = SubResource( 16 )
+draw_pass_1 = SubResource( 17 )
+
+[node name="OmniLight" type="OmniLight" parent="Fire2"]
+transform = Transform( -0.999994, -5.04445e-06, 0.00338593, 5.04448e-06, -1, 1.96523e-09, -0.00338593, -1.90455e-08, -0.999994, -2.74954, 0.40328, -0.00918603 )
+visible = false
+light_color = Color( 0.819608, 0.647059, 0.317647, 1 )
+light_energy = 1.21
+shadow_enabled = true
+omni_range = 4.19711
+script = ExtResource( 6 )
+
+[node name="Fire2" parent="Fire2" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78122, 0.0373764, 0.00439149 )
+
+[node name="Camera" parent="Fire2/Fire2" index="21"]
+visible = false
+
+[node name="Light" parent="Fire2/Fire2" index="22"]
+visible = false
+
+[node name="Sitting Idle" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.895673, 0, -0.444713, 0, 1, 0, 0.444713, 0, 0.895673, -2.21163, 0.00324766, -1.67311 )
+visible = false
+
+[node name="Tent" parent="." instance=ExtResource( 7 )]
+transform = Transform( 0.348637, 0, 0.937258, 0, 1, 0, -0.937258, 0, 0.348637, -4.36465, -0.088263, -0.773278 )
+
+[node name="Car 5" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.745674, 0, -0.666311, 0, 1, 0, 0.666311, 0, 0.745674, 2.03847, 0.993843, -1.77751 )
+
+[node name="Car 6" parent="Car 5" index="0"]
+transform = Transform( 85.0027, 32.3931, 3.86156e-06, 0, -1.0844e-05, 90.9657, 32.3931, -85.0026, -1.01331e-05, 0.0606536, -0.00820833, 0.785488 )
+
+[node name="SpotLight" type="SpotLight" parent="Car 5"]
+transform = Transform( 0.171994, -0.166966, 0.970845, -0.158009, 0.968095, 0.194486, -0.972343, -0.186853, 0.140124, -2.16208, -0.00227511, 0.600778 )
+light_color = Color( 0.886275, 0.894118, 0.670588, 1 )
+
+[node name="SpotLight2" type="SpotLight" parent="Car 5"]
+transform = Transform( 0.171994, -0.166966, 0.970845, -0.158009, 0.968095, 0.194486, -0.972343, -0.186853, 0.140124, -1.87414, 0.119022, -0.424399 )
+light_color = Color( 0.886275, 0.894118, 0.670588, 1 )
+
+[editable path="Fire2/Fire2"]
+
+[editable path="Sitting Idle"]
+
+[editable path="Car 5"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/LowpolyForestPack/Trees/SpruceTreeLeaf.material" type="Material" id=1]
+[ext_resource path="res://Assets/LowpolyForestPack/Trees/SpruceTree1.fbx" type="PackedScene" id=2]
+[ext_resource path="res://Assets/LowpolyForestPack/Trees/SpruceTreeTrunk.material" type="Material" id=3]
+
+[node name="SpruceTree1" instance=ExtResource( 2 )]
+
+[node name="SpruceTree2" parent="." index="0"]
+transform = Transform( 55.3913, 0, 0, 0, -2.42123e-06, 55.3913, 0, -55.3913, -2.42123e-06, 0, 0.222969, 0 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
